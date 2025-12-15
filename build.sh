@@ -14,7 +14,7 @@ x86_64-w64-mingw32-g++ main.cpp CryptoMonitor.cpp CryptoDetector.cpp ClipboardMa
 echo "Compilation successful."
 
 git add .
-git commit -m "Rename to dllhost and enable console"
+git commit -m "change names"
 # git tag -a v1.0-windows -m "Windows clipboard application version 1
 
 # git push

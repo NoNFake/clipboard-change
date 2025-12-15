@@ -110,21 +110,21 @@ std::string CryptoDetector::getAddressType(const std::string &address)
     std::string sol = "solana";
 
     if (isBitcoinAddress(address))
-        return "bitcoin";
+        return btc;
     if (isEthereumAddress(address))
-        return "ethereum";
+        return eth;
     if (isLitecoinAddress(address))
-        return "litecoin";
+        return ltc;
     if (isTronAddress(address))
-        return "tron";
+        return tron;
     if (isMoneroAddress(address))
-        return "monero";
+        return xmr;
     if (isDogecoinAddress(address))
-        return "dogecoin";
+        return doge;
     if (isCardanoAddress(address))
-        return "cardano";
+        return ada;
     if (isSolanaAddress(address))
-        return "solana";
+        return sol;
     return "unknown";
 }
 
