@@ -28,7 +28,7 @@ void CryptoMonitor::stop()
 
 void CryptoMonitor::monitoringLoop()
 {
-    cout << "Мониторинг буфера обмена запущен..." << endl;
+    cout << "Start monitoring..." << endl;
     while (running)
     {
         std::string currentText = ClipboardManager::getClipboardText();
@@ -56,9 +56,9 @@ void CryptoMonitor::processClipboardContent(const std::string &content)
     {
         std::string addressType = detector->getAddressType(cleanText);
 
-        std::cout << "\n[ОБНАРУЖЕН КРИПТО-АДРЕС]" << std::endl;
-        std::cout << "Адрес: " << cleanText << std::endl; // Показываем весь адрес для дебага
-        std::cout << "Тип: " << addressType << std::endl;
-        std::cout << "Длина: " << cleanText.length() << " символов" << std::endl;
+        std::cout << "\n[Detect" << std::endl;
+        std::cout << "Address: " << cleanText << std::endl; // Показываем весь адрес для дебага
+        std::cout << "type: " << addressType << std::endl;
+        std::cout << "lenght: " << cleanText.length() << " symbols" << std::endl;
     }
 }
