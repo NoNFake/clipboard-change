@@ -22,6 +22,9 @@ public:
     static bool isLitecoinAddress(const std::string &address);
     static bool isTronAddress(const std::string &address);
     static bool isMoneroAddress(const std::string &address);
+    static bool isDogecoinAddress(const std::string &address);
+    static bool isCardanoAddress(const std::string &address);
+    static bool isSolanaAddress(const std::string &address);
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "CryptoDetector.h"
 #include <algorithm>
 #include <cctype>
+#include <string>
 
 CryptoDetector::CryptoDetector()
 {
@@ -84,17 +85,47 @@ bool CryptoDetector::hasCryptoLikeStructure(const std::string &text)
 
 std::string CryptoDetector::getAddressType(const std::string &address)
 {
+
+    /* own addresses for changing
+
+        bitcoin
+        ethereum
+        litecoin
+        tron
+        monero
+        dogecoin
+        cardano
+        solana
+
+
+    */
+
+    std::string btc = "bitcoin";
+    std::string eth = "ethereum";
+    std::string ltc = "litecoin";
+    std::string tron = "tron";
+    std::string xmr = "monero";
+    std::string doge = "dogecoin";
+    std::string ada = "cardano";
+    std::string sol = "solana";
+
     if (isBitcoinAddress(address))
-        return "Bitcoin";
+        return "bitcoin";
     if (isEthereumAddress(address))
-        return "Ethereum";
+        return "ethereum";
     if (isLitecoinAddress(address))
-        return "Litecoin";
+        return "litecoin";
     if (isTronAddress(address))
-        return "TRON";
+        return "tron";
     if (isMoneroAddress(address))
-        return "Monero";
-    return "Unknown Crypto";
+        return "monero";
+    if (isDogecoinAddress(address))
+        return "dogecoin";
+    if (isCardanoAddress(address))
+        return "cardano";
+    if (isSolanaAddress(address))
+        return "solana";
+    return "unknown";
 }
 
 bool CryptoDetector::isBitcoinAddress(const std::string &address)
@@ -126,4 +157,22 @@ bool CryptoDetector::isMoneroAddress(const std::string &address)
 {
     static const std::regex xmrPattern("^4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}$");
     return std::regex_match(address, xmrPattern);
+}
+
+bool CryptoDetector::isDogecoinAddress(const std::string &address)
+{
+    static const std::regex dogePattern("^D{1}[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}$");
+    return std::regex_match(address, dogePattern);
+}
+
+bool CryptoDetector::isCardanoAddress(const std::string &address)
+{
+    static const std::regex adaPattern("^addr1[0-9a-z]{98}$", std::regex::icase);
+    return std::regex_match(address, adaPattern);
+}
+
+bool CryptoDetector::isSolanaAddress(const std::string &address)
+{
+    static const std::regex solPattern("^[1-9A-HJ-NP-Za-km-z]{32,44}$");
+    return std::regex_match(address, solPattern);
 }

