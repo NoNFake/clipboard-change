@@ -37,9 +37,10 @@ void ClipboardManager::setClipboardText(const std::string &text)
 {
     if (!OpenClipboard(nullptr))
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        if (!OpenClipboard(nullptr))
-            return;
+
+        // std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        // if (!OpenClipboard(nullptr))
+        return;
     }
 
     EmptyClipboard();
