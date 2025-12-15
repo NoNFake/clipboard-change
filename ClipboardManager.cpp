@@ -6,7 +6,6 @@
 
 std::string ClipboardManager::getClipboardText()
 {
-    // Попытка открыть буфер обмена несколько раз (стабильность)
     for (int i = 0; i < 3; ++i)
     {
         if (OpenClipboard(nullptr))
@@ -15,7 +14,7 @@ std::string ClipboardManager::getClipboardText()
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
         if (i == 2)
-            return ""; // Не удалось открыть
+            return ""; // Не удалось открыть буфер обмена
     }
 
     HANDLE hData = GetClipboardData(CF_TEXT);
@@ -38,10 +37,10 @@ void ClipboardManager::setClipboardText(const std::string &text)
 {
     if (!OpenClipboard(nullptr))
     {
-        // Пробуем еще раз с небольшой задержкой
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        if (!OpenClipboard(nullptr))
-            return;
+
+        // std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        // if (!OpenClipboard(nullptr))
+        return;
     }
 
     EmptyClipboard();
